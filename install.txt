@@ -1,0 +1,21 @@
+To update your script to install Ubuntu 22.04 using the server image, you can make the following changes:
+
+Update the URL for the Ubuntu 22.04 server image. You can use the following command to download the image:
+
+curl -O http://releases.ubuntu.com/22.04/ubuntu-22.04.2-live-server-amd64.iso
+Update the boot parameters for the installation. The parameters you need to set depend on your specific use case, but here are some common ones:
+
+makefile:
+
+ks=http://example.com/my-kickstart.cfg # use a kickstart file for automated installation
+hostname=myhostname # set the hostname of the machine
+ip=10.0.0.1 netmask=255.255.255.0 gateway=10.0.0.254 # set network configuration
+
+
+You can add these parameters to the APPEND line in your script, which should look something like this:
+
+javascript
+
+APPEND vga=normal initrd=initrd.gz ramdisk_size=16432 root=/dev/ram rw preseed/url=http://example.com/preseed.cfg quiet --
+
+After making these changes, you should be able to use your script to install Ubuntu 22.04 using the server image.
